@@ -1,0 +1,22 @@
+{
+  "name": "node-signing-server",
+  "version": "0.0.1",
+  "description": "Simple signing server with self-signing certifications.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pfx",
+    "cer",
+    "sign",
+    "signing",
+    "certificate",
+    "self-signed"
+  ],
+  "author": "Pavel Shtanko (shtpavel@gmail.com)",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^2.7.0"
+  }
+}
