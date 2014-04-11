@@ -1,4 +1,5 @@
-var crypto = require('crypto');
+var crypto = require('crypto'),
+	ursa = require('ursa');
 
 var keyService = (function(){
 	function generateKeyPair(callback){
