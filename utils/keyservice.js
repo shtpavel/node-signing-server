@@ -1,19 +1,22 @@
-var crypto = require('crypto');
+var crypto = require('crypto'),
+	pem = require('pem');
 
 var keyService = (function(){
 	function generateKeyPair(callback){
-		var diffieHellman = crypto.createDiffieHellman(128);
-		diffieHellman.generateKeys('hex');
-		privateKey = diffieHellman.getPrivateKey('hex');
-		publicKey = diffieHellman.getPublicKey('hex');
-		console.log('Private key: ' + privateKey);
-		console.log('Public key: ' + publicKey);
-		callback(privateKey, publicKey);
+		pem.createCertificate({days:365, selfSigned:true}, function(err, keys){
+			console.log('Private key: ' + keys.serviceKey);
+			console.log('Public key: ' + keys.clientKey);
+			callback(keys.serviceKey, keys.clientKey);
+		});
 	}
 
 	function signData(data, privateKey, callback){
+		console.log('Tryin\' to sign data: ', data, 'with privateKey: ', privateKey);
 		var sign = crypto.createSign('RSA-SHA256');
-		var signature = sign.sign(privateKey, data);
+		sign.update(data);
+		console.log('Sign created.');
+		var signature = sign.sign(privateKey, 'hex');
+		console.log('signature: ', signature);
 		callback(signature);
 	}
 

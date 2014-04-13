@@ -17,6 +17,7 @@
   "author": "Pavel Shtanko (shtpavel@gmail.com)",
   "license": "ISC",
   "dependencies": {
-    "restify": "^2.7.0"
+    "restify": "^2.7.0",
+    "pem": "^1.4.0"
   }
 }
