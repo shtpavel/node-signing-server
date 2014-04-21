@@ -7,17 +7,19 @@ Server that allows you to sign your data and to validate it on some public place
 
 ##Configuration
 * ```
-config\appConfig.js
-```
-  * _storeDir_ - the place to store your keys on your filesystem
-  * _keyEncoding_ - keys encoding ('binary', 'hex', 'base64')
+  config\appConfig.js
+  ```
+
+    * _storeDir_ - the place to store your keys on your filesystem
+    * _keyEncoding_ - keys encoding ('binary', 'hex', 'base64')
 
 ##API
 * Gets public key
 
- ```
- GET /:client/key
- ```
+   ```
+   GET /:client/key
+   ```
+   
   * client - client name
   * response:
     * ```
@@ -26,9 +28,10 @@ config\appConfig.js
 
 * Recreate key pair and return public key
 
- ```
- PUT /:client/key
- ```
+   ```
+   PUT /:client/key
+   ```
+   
   * client - client name
   * response:
     * ```
@@ -37,15 +40,18 @@ config\appConfig.js
 
 * Sign data
 
- ```
- POST /:client/sign
- ```
+   ```
+   POST /:client/sign
+   ```
+   
   * client - client name
   * Request body should contains **data** parameter with data you want to sign
   * response:
-    * ```
-      {signature: "Signature", publicKey: "some public key to verigy data", error: "error if exist"}
-      ```
+    *   ```
+        {signature: "Signature", publicKey: "some public key to verigy data", error: "error if exist"}
+        ```
+
+Thanks.
 
 
 
