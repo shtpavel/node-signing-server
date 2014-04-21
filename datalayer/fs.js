@@ -15,45 +15,37 @@ var fsLayer = (function(){
 				fs.mkdirSync(companyDir);
 			}
 			fs.writeFile(path.join(companyDir, publicFileName), publicKey, function(err){
-				if (err) throw err;
-				console.log('Public key saved to ' + companyDir);
+				if (err) return callback(err);
 			});
 			fs.writeFile(path.join(companyDir, privateFileName), privateKey, function(err){
-				if (err) throw err;
-				console.log('Private key saved to ' + companyDir);
+				if (err) return callback(err);
 			});
 
 			if (callback)
-				callback(privateKey, publicKey);
+				callback(null, privateKey, publicKey);
 		});
 	}
 
-	function getKeys(client, callback){
+	function getKeys(client, createIfNoKey, callback){
 		var privateKeyPath = path.join(storeDir, client, privateFileName);
 		var publicKeyPath = path.join(storeDir, client, publicFileName);
-		console.log("Private key path: ", privateKeyPath);
-		console.log("Public key path: ", publicKeyPath);
 
 		fs.exists(privateKeyPath, function(exists){
 			if (exists) {
-				console.log('Path exists');
 				fs.readFile(privateKeyPath,'utf8', function(err,privateKey){
 					if (err) throw err;
 					fs.readFile(publicKeyPath,'utf8', function(err,publicKey){
 						if(err) throw err;
-						console.log('Private key: ', privateKey);
-						console.log('Public key: ', publicKey);
-						callback(privateKey, publicKey);
+						callback(null, privateKey, publicKey);
 					});
 				});
 			} else {
-				console.log('Path doesn\'t exists');
+				if (!createIfNoKey) {
+					return callback(new Error('Can\'t find key for selected company.'));
+				}
 				keyservice.generateKeyPair(function(privateKey, publicKey){
 					saveKeys(client, privateKey, publicKey, function(privateKey, publicKey){
-						console.log('Keys was saved');
-						console.log('Private key: ', privateKey);
-						console.log('Public key: ', publicKey);
-						callback(privateKey, publicKey);
+						return callback(null, privateKey, publicKey);
 					});
 				});
 			}
