@@ -3,7 +3,7 @@ var fsLayer = require('../datalayer/fs'),
 
 module.exports = (function(){
 	function sign(req, res, next){
-		return fsLayer.getKeys(req.params.client, true, function(err, privateKey, publicKey){
+		return fsLayer.getKeys(req.params.client, false, function(err, privateKey, publicKey){
 			if (err) {
 				res.send(404,{
 					error: JSON.stringify(err, ['message'], 2)
