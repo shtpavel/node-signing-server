@@ -7,7 +7,7 @@ Server that allows you to sign your data and to validate it on some public place
 
 ##Configuration
 * ```
-  config\appConfig.js
+  config\config.js
   ```
 
     * _storeDir_ - the place to store your keys on your filesystem
