@@ -1,4 +1,4 @@
 module.exports = {
-	storeDir: 'C:/cert',
+	storeDir: '',
 	keyEncoding: 'hex',
 }
